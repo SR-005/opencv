@@ -25,8 +25,8 @@ while True:
                 pixelx,pixely=int(landmarks.x*width), int(landmarks.y*height)
                 print(id,pixelx,pixely)
 
-                if id == 0:     #drawing a purple circle with landmark 0
-                    cv2.circle(img, (pixelx,pixely), 5, (255,0,255), cv2.FILLED) #5 is the radius and (255,0,255) is code for color purple
+                if id in [4,8] :     #drawing a purple circle with landmark 0
+                    cv2.circle(img, (pixelx,pixely), 15, (255,0,255), cv2.FILLED) #5 is the radius and (255,0,255) is code for color purple
 
 
             mpdraw.draw_landmarks(img,handlandmarks,mphands.HAND_CONNECTIONS) #in the "img" it will set landmarks for each hand in the feed and set connections
