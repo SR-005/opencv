@@ -12,6 +12,9 @@ hands=mphands.Hands()
 
 while True:
     success,img=feed.read()
+    imgrgb=cv2.cvtColor(img,cv2.COLOR_BGR2RGB)  #Converting BGR color coded img to RGB as it is the one supported!
+    results=hands.process(imgrgb)       #"process" is an inbuilt function that gives the necessart details automatically
+
     cv2.imshow("Video",img)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
