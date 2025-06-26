@@ -9,7 +9,7 @@ feed.set(10,100) #id 10 is for BRIGHTNESS
 #DEFAULT FORMALITY!!!!
 mphands=mp.solutions.hands
 hands=mphands.Hands()               #it can contain multiple hands
-mpdraw=mp.solutions.drawing_utils  #built in funtion to draw boxes for each hand(in this case)
+mpdraw=mp.solutions.drawing_utils  #built in funtion to point hand landmarks for each hand(in this case)
 
 while True:
     success,img=feed.read()
@@ -19,8 +19,9 @@ while True:
 
     if results.multi_hand_landmarks:
         for handlandmarks in results.multi_hand_landmarks:
-            mpdraw.draw_landmarks(img)
+            mpdraw.draw_landmarks(img,handlandmarks,mphands.HAND_CONNECTIONS) #in the "img" it will set landmarks for each hand in the feed and set connections
 
+    img=cv2.flip(img,1)
     cv2.imshow("Video",img)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
