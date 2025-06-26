@@ -20,7 +20,11 @@ while True:
     if results.multi_hand_landmarks:
         for handlandmarks in results.multi_hand_landmarks:
             for id,landmarks in enumerate(handlandmarks.landmark): #getting id and landmarks of the hands in the feed [DATA]
-                print(id,landmarks)
+                '''print(id,landmarks)'''  #returns the position of landmarks in decimal values, we have to convert to pixel values
+                height,width,channel=img.shape   #collecting height,width and channel inorder to calculate position in pixels i,e x*width and y*height
+                pixelx,pixely=int(landmarks.x*width), int(landmarks.y*height)
+                print(pixelx,pixely)
+
 
 
             mpdraw.draw_landmarks(img,handlandmarks,mphands.HAND_CONNECTIONS) #in the "img" it will set landmarks for each hand in the feed and set connections
