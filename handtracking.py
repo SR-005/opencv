@@ -8,12 +8,14 @@ feed.set(10,100) #id 10 is for BRIGHTNESS
 
 #DEFAULT FORMALITY!!!!
 mphands=mp.solutions.hands
-hands=mphands.Hands()
+hands=mphands.Hands()               #it can contain multiple hands
 
 while True:
     success,img=feed.read()
     imgrgb=cv2.cvtColor(img,cv2.COLOR_BGR2RGB)  #Converting BGR color coded img to RGB as it is the one supported!
     results=hands.process(imgrgb)       #"process" is an inbuilt function that gives the necessart details automatically
+    print(results.multi_hand_landmarks)
+
 
     cv2.imshow("Video",img)
     if cv2.waitKey(1) & 0xFF == ord('q'):
