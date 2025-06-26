@@ -19,6 +19,10 @@ while True:
 
     if results.multi_hand_landmarks:
         for handlandmarks in results.multi_hand_landmarks:
+            for id,landmarks in enumerate(handlandmarks.landmark): #getting id and landmarks of the hands in the feed [DATA]
+                print(id,landmarks)
+
+
             mpdraw.draw_landmarks(img,handlandmarks,mphands.HAND_CONNECTIONS) #in the "img" it will set landmarks for each hand in the feed and set connections
 
     img=cv2.flip(img,1)
