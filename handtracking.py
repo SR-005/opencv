@@ -18,7 +18,8 @@ while True:
     '''print(results.multi_hand_landmarks)'''
 
     if results.multi_hand_landmarks:
-        for handlandmarks in results.multi_hand_landmarks:
+        for handlandmarks,leftrighthand in zip(results.multi_hand_landmarks,results.multi_handedness):
+            handlabel=leftrighthand.classification[0].label #it labels left and right hands
             for id,landmarks in enumerate(handlandmarks.landmark): #getting id and landmarks of the hands in the feed [DATA]
                 '''print(id,landmarks)'''  #returns the position of landmarks in decimal values, we have to convert to pixel values
                 height,width,channel=img.shape   #collecting height,width and channel inorder to calculate position in pixels i,e x*width and y*height
@@ -26,7 +27,8 @@ while True:
                 print(id,pixelx,pixely)
 
                 if id in [4,8] :     #drawing a purple circle with landmark 0
-                    cv2.circle(img, (pixelx,pixely), 15, (255,0,255), cv2.FILLED) #5 is the radius and (255,0,255) is code for color purple
+                    color = (255, 0, 255) if handlabel == "Left" else (0, 255, 255) #check if left or right and assigns corresponding colors
+                    cv2.circle(img, (pixelx,pixely), 15, color, cv2.FILLED) #5 is the radius and (255,0,255) is code for color purple
 
 
             mpdraw.draw_landmarks(img,handlandmarks,mphands.HAND_CONNECTIONS) #in the "img" it will set landmarks for each hand in the feed and set connections
